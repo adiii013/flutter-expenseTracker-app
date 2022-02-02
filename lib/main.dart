@@ -1,4 +1,7 @@
-import './transaction.dart';
+import 'package:expense_tracker/widgets/new_transactions.dart';
+import 'package:expense_tracker/widgets/user_transactions.dart';
+
+import './widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,60 +19,27 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transaction> transaction = [
-    Transaction(id: 'h1', title: 'Shoes', amount: 69.9, date: DateTime.now()),
-    Transaction(id: 'h1', title: 'Shoes', amount: 69.9, date: DateTime.now()),
-    Transaction(id: 'h1', title: 'Shoes', amount: 69.9, date: DateTime.now()),
-    Transaction(id: 'h1', title: 'Shoes', amount: 69.9, date: DateTime.now()),
-  ];
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Expense tracker'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            child: Card(
-              child: Text('Chart'),
-              elevation: 5,
-            ),
-          ),
-          Column(
-            children: transaction.map((tx) {
-              return Card(
-                child: Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 15,
-                      ),
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                        color: Colors.black,
-                        width: 2,
-                      )),
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        tx.amount.toString(),
-                        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
-                      ),
-                    ),
-                    Column(
-                      children: [Text(tx.title), Text(tx.date.toString())],
-                    )
-                  ],
+      body:SingleChildScrollView(
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                child: Card(
+                  child: Text('Chart'),
+                  elevation: 5,
                 ),
-              );
-            }).toList(),
-          )
-        ],
+              ),
+              UserTransaction(),
+            ],
+          ),
       ),
     );
   }
