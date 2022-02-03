@@ -23,6 +23,14 @@ class _NewTransactionState extends State<NewTransaction> {
     Navigator.of(context).pop();
   }
 
+  void presentDatePicker() {
+    showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2020),
+        lastDate: DateTime.now());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -43,9 +51,26 @@ class _NewTransactionState extends State<NewTransaction> {
                 keyboardType: TextInputType.number,
                 onSubmitted: (_) => submitData(),
               ),
-              FlatButton(
+              Container(
+                height: 70,
+                child: Row(
+                  children: [
+                    Text('No Date Chosen!'),
+                    FlatButton(
+                      textColor: Theme.of(context).primaryColor,
+                      child: Text(
+                        'Choose Date',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {},
+                    )
+                  ],
+                ),
+              ),
+              RaisedButton(
                 child: Text('Add Transaction'),
-                textColor: Colors.purple,
+                color: Theme.of(context).primaryColor,
+                textColor: Colors.white,
                 onPressed: submitData,
               )
             ],
